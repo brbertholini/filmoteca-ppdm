@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "803629971595",
+    "project_id": "filmoteca-1c89c",
+    "storage_bucket": "filmoteca-1c89c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803629971595:android:442dedc7e813b4259bfc8e",
+        "android_client_info": {
+          "package_name": "com.example.filmoteca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXeYDvGUvISA_pSsVm5a_eT_bG7VGTwgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
