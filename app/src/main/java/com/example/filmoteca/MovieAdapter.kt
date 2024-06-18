@@ -6,15 +6,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieAdapter(private var movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private var movies: List<Movie>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.text_view_title)
         private val synopsisTextView: TextView = itemView.findViewById(R.id.text_view_synopsis)
+        private val directorTextView: TextView = itemView.findViewById(R.id.directorText)
 
         fun bind(movie: Movie) {
             titleTextView.text = movie.name
             synopsisTextView.text = movie.synopsis
+            directorTextView.text = movie.director
+
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(movie)
+            }
         }
     }
 
@@ -33,4 +39,9 @@ class MovieAdapter(private var movies: List<Movie>) : RecyclerView.Adapter<Movie
         movies = newMovies
         notifyDataSetChanged()
     }
+}
+
+
+interface OnItemClickListener {
+    fun onItemClick(movie: Movie)
 }

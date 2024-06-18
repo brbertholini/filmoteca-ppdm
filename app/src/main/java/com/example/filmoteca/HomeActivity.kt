@@ -2,6 +2,7 @@ package com.example.filmoteca
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,22 +25,45 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        movieAdapter = MovieAdapter(mutableListOf())
+        movieAdapter = MovieAdapter(emptyList(), object : OnItemClickListener {
+            override fun onItemClick(movie: Movie) {
+                openUpdateMovieActivity(movie)
+            }
+        })
         binding.recyclerViewMovies.adapter = movieAdapter
         binding.recyclerViewMovies.layoutManager = LinearLayoutManager(this)
 
         fetchMovies()
     }
 
-    private fun fetchMovies() {
+    fun fetchMovies() {
         db.collection("movies").get().addOnSuccessListener { result ->
             val movies = result.map { document ->
+                // Verifica se o campo "ageMin" existe e é um número válido
+                val ageMin: Long? = document.getLong("ageMin")
+                val ageMinInt = ageMin?.toInt() ?: 0 // Converte para Int, default para 0 se for null
+
                 Movie(
                     name = document.getString("name") ?: "",
-                    synopsis = document.getString("synopsis") ?: ""
+                    synopsis = document.getString("synopsis") ?: "",
+                    director = document.getString("director") ?: "",
+                    ageMin = ageMinInt,
+                    releaseDate = document.getString("releaseDate") ?: ""
                 )
             }
             movieAdapter.updateMovies(movies)
         }
     }
+
+    private fun openUpdateMovieActivity(movie: Movie) {
+        val intent = Intent(this, ManageMovieActivity::class.java)
+        intent.putExtra("movie_name", movie.name)
+        intent.putExtra("movie_synopsis", movie.synopsis)
+        intent.putExtra("movie_director", movie.director)
+        intent.putExtra("ageMin", movie.ageMin.toString()) // Convertido para String
+        intent.putExtra("releaseDate", movie.releaseDate)
+        startActivity(intent)
+    }
 }
+
+

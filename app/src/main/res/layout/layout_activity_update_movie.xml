@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#353535">
+
+        <!-- Layout com RecyclerView e Button -->
+
+        <!-- NavBar na parte inferior -->
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/nav_bar"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="Gerenciar Filme"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Nome do Filme"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/editNameMovieNew"
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="#575656"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Nome do Filme"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#DAD8D8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Nome do Diretor"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/editDirectorNew"
+                    android:layout_width="311dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="#575656"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Nome do Diretor"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#DAD8D8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="355dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Idade Mínima"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/editAgeMinNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="#575656"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Idade Mínima"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#DAD8D8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data de lançamento"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/editReleaseDateNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="#575656"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Data de lançamento"
+                    android:inputType="date"
+                    android:padding="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#DAD8D8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Sinopse"
+                    android:textColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/editSinopseNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="106dp"
+                    android:background="#575656"
+                    android:backgroundTint="#2C2C2C"
+                    android:gravity="center"
+                    android:hint="Sinopse"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#DAD8D8" />
+            </LinearLayout>
+
+            <!-- New Buttons for Additional Functionalities -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/trash" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0"
+                    android:background="@null"
+                    app:srcCompat="@drawable/thumbs" />
+
+                <Button
+                    android:id="@+id/btnUpdateMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#FF4500"
+                    android:gravity="center"
+                    android:text="Atualizar Filme" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0"
+                    android:background="@null"
+                    app:srcCompat="@drawable/bookmark" />
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:background="@null"
+                    app:srcCompat="@drawable/hard_drive" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <include
+            android:id="@+id/nav_bar"
+            layout="@layout/nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

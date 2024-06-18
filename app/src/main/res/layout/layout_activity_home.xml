@@ -18,8 +18,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_movies"
-        android:layout_width="372dp"
-        android:layout_height="565dp"
+        android:layout_width="358dp"
+        android:layout_height="533dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
+        android:backgroundTint="#FF4500"
         android:text="Adicionar um novo Filme" />
 
     <include
