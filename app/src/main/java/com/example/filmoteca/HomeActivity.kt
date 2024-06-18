@@ -3,6 +3,7 @@ package com.example.filmoteca
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +16,21 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var movieAdapter: MovieAdapter
     private val db = FirebaseFirestore.getInstance()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LayoutActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val btnLike = findViewById<ImageButton>(R.id.btnLike)
+        val btnCheck = findViewById<ImageButton>(R.id.btnCheck)
+        val btnBookmark = findViewById<ImageButton>(R.id.btnBookmark)
+
+        btnBookmark.setOnClickListener {
+            val intent = Intent(this, FavoriteMoviesActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.buttonAddMovie.setOnClickListener {
             val intent = Intent(this, AddMovieActivity::class.java)
@@ -64,6 +76,7 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("releaseDate", movie.releaseDate)
         startActivity(intent)
     }
+
 }
 
 

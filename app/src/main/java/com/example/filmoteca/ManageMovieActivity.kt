@@ -161,7 +161,7 @@ class ManageMovieActivity : AppCompatActivity() {
 
         val movie = Movie(name, synopsis, director, ageMin.toIntOrNull() ?: 0, releaseDate)
 
-        // Adicionar o filme aos favoritos localmente usando o PreferenceManager
+        // Adicionar o filme aos favoritos usando PreferenceManager
         PreferenceManager.addFavoriteMovie(this, movie)
 
         Toast.makeText(this, "Filme adicionado aos favoritos", Toast.LENGTH_SHORT).show()

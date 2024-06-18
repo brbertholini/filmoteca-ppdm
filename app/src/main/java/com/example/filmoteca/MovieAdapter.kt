@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class MovieAdapter(private var movies: List<Movie>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -40,6 +42,7 @@ class MovieAdapter(private var movies: List<Movie>, private val itemClickListene
         notifyDataSetChanged()
     }
 }
+
 
 
 interface OnItemClickListener {
