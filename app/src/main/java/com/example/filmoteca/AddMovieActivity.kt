@@ -17,10 +17,8 @@ class AddMovieActivity : AppCompatActivity() {
         binding = LayoutActivityAddMovieBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Set up save button click listener
         binding!!.btnSaveMovie.setOnClickListener { v -> saveMovieData() }
     }
     private fun isValidMovieName(movieName: String): Boolean {
@@ -44,7 +42,6 @@ class AddMovieActivity : AppCompatActivity() {
         val releaseDateString = binding!!.editReleaseDate.getText().toString().trim()
         val synopsis = binding!!.editSinopse.getText().toString().trim()
 
-        // Check if any field is empty
         if (movieName.isEmpty() || directorName.isEmpty() || ageMinString.isEmpty() ||
             releaseDateString.isEmpty() || synopsis.isEmpty()
         ) {
@@ -52,19 +49,16 @@ class AddMovieActivity : AppCompatActivity() {
             return
         }
 
-        // Validate movie name format (allow only letters, numbers, and some special characters)
         if (!isValidMovieName(movieName)) {
             Toast.makeText(this, "Nome do filme inválido!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Validate director name format (allow only letters, numbers, and some special characters)
         if (!isValidName(directorName)) {
             Toast.makeText(this, "Nome do diretor inválido!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Convert ageMin to integer (handle potential exception)
         var ageMin = 0
         ageMin = try {
             ageMinString.toInt()
@@ -74,19 +68,16 @@ class AddMovieActivity : AppCompatActivity() {
             return
         }
 
-        // Validate ageMin (must be non-negative)
         if (ageMin < 0) {
             Toast.makeText(this, "Idade mínima deve ser não negativa!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Validate release date format (using a simple regex check)
         if (!isValidDateFormat(releaseDateString)) {
             Toast.makeText(this, "Data de lançamento inválida!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Create a movie data map
         val movieData = HashMap<String, Any>()
         movieData["name"] = movieName
         movieData["director"] = directorName
@@ -94,10 +85,8 @@ class AddMovieActivity : AppCompatActivity() {
         movieData["releaseDate"] = releaseDateString
         movieData["synopsis"] = synopsis
 
-        // Get a reference to the "movies" collection
         val moviesRef = db!!.collection("movies")
 
-        // Add the movie data to the collection
         moviesRef.add(movieData)
             .addOnSuccessListener { documentReference: DocumentReference? ->
                 Toast.makeText(

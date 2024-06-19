@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 object PreferenceManager {
     private const val PREFERENCE_NAME = "filmoteca_preferences"
     private const val KEY_FAVORITE_MOVIES = "favorite_movies"
+    private const val KEY_WATCH_LATER_MOVIES = "watch_later_movies"
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
@@ -20,22 +21,43 @@ object PreferenceManager {
         return gson.fromJson(json, type) ?: mutableListOf()
     }
 
+    fun getWatchLaterMovies(context: Context): MutableList<Movie> {
+        val sharedPreferences = getSharedPreferences(context)
+        val gson = Gson()
+        val json = sharedPreferences.getString(KEY_WATCH_LATER_MOVIES, null)
+        val type = object : TypeToken<MutableList<Movie>>() {}.type
+        return gson.fromJson(json, type) ?: mutableListOf()
+    }
+
     fun addFavoriteMovie(context: Context, movie: Movie) {
         val sharedPreferences = getSharedPreferences(context)
         val editor = sharedPreferences.edit()
         val gson = Gson()
 
-        // Obter a lista atual de filmes favoritos
         val favoriteMovies = getFavoriteMovies(context)
 
-        // Adicionar o novo filme à lista de filmes favoritos, se ainda não estiver presente
         if (!favoriteMovies.contains(movie)) {
             favoriteMovies.add(movie)
         }
 
-        // Converter a lista para JSON e salvar nas preferências compartilhadas
         val json = gson.toJson(favoriteMovies)
         editor.putString(KEY_FAVORITE_MOVIES, json)
+        editor.apply()
+    }
+
+    fun addWatchLaterMovies(context: Context, movie: Movie) {
+        val sharedPreferences = getSharedPreferences(context)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+
+        val watchLaterMovies = getWatchLaterMovies(context)
+
+        if (!watchLaterMovies.contains(movie)) {
+            watchLaterMovies.add(movie)
+        }
+
+        val json = gson.toJson(watchLaterMovies)
+        editor.putString(KEY_WATCH_LATER_MOVIES, json)
         editor.apply()
     }
 
@@ -44,13 +66,10 @@ object PreferenceManager {
         val editor = sharedPreferences.edit()
         val gson = Gson()
 
-        // Obter a lista atual de filmes favoritos
         val favoriteMovies = getFavoriteMovies(context)
 
-        // Remover o filme da lista de filmes favoritos
         favoriteMovies.remove(movie)
 
-        // Converter a lista para JSON e salvar nas preferências compartilhadas
         val json = gson.toJson(favoriteMovies)
         editor.putString(KEY_FAVORITE_MOVIES, json)
         editor.apply()

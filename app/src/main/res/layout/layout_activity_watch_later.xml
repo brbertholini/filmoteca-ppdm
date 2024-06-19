@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
-        android:text="Lista de Filmes"
+        android:text="Lista de Filmes Para Assistir Depois"
         android:textColor="#F6F6F6"
         android:textSize="20sp" />
 
@@ -22,16 +22,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
         android:padding="10dp" />
-
-    <Button
-        android:id="@+id/button_add_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_view_movies"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#FF4500"
-        android:text="Adicionar um novo Filme" />
 
     <include
         android:id="@+id/nav_bar"

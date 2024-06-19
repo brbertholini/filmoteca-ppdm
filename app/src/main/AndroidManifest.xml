@@ -28,6 +28,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".ManageMovieActivity" />
         <activity android:name=".FavoriteMoviesActivity" />
+        <activity android:name=".LikedMoviesActivity" />
+        <activity android:name=".WatchLaterMoviesActivity" />
     </application>
 
 </manifest>

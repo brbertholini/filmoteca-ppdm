@@ -5,23 +5,22 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.filmoteca.databinding.LayoutActivityHomeBinding
+import com.example.filmoteca.databinding.LayoutActivityLikedMoviesBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HomeActivity : AppCompatActivity() {
+class LikedMoviesActivity : AppCompatActivity() {
 
-    private lateinit var binding: LayoutActivityHomeBinding
+    private lateinit var binding: LayoutActivityLikedMoviesBinding
     private lateinit var movieAdapter: MovieAdapter
+
     private val db = FirebaseFirestore.getInstance()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LayoutActivityHomeBinding.inflate(layoutInflater)
+        binding = LayoutActivityLikedMoviesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val btnLike = findViewById<ImageButton>(R.id.btnLike)
+        val btnGrid = findViewById<ImageButton>(R.id.btnGrid)
         val btnCheck = findViewById<ImageButton>(R.id.btnCheck)
         val btnBookmark = findViewById<ImageButton>(R.id.btnBookmark)
 
@@ -30,8 +29,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnLike.setOnClickListener {
-            val intent = Intent(this, LikedMoviesActivity::class.java)
+        btnGrid.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
 
@@ -40,28 +39,21 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.buttonAddMovie.setOnClickListener {
-            val intent = Intent(this, AddMovieActivity::class.java)
-            startActivity(intent)
-        }
-
         movieAdapter = MovieAdapter(emptyList(), object : OnItemClickListener {
             override fun onItemClick(movie: Movie) {
-                openUpdateMovieActivity(movie)
             }
         })
         binding.recyclerViewMovies.adapter = movieAdapter
         binding.recyclerViewMovies.layoutManager = LinearLayoutManager(this)
 
-        fetchMovies()
+        loadLikedMovies()
     }
 
-    fun fetchMovies() {
-        db.collection("movies").get().addOnSuccessListener { result ->
+    private fun loadLikedMovies() {
+        db.collection("likedMovies").get().addOnSuccessListener { result ->
             val movies = result.map { document ->
-                val ageMin: Long? = document.getLong("ageMin")
+                val ageMin = document.getString("ageMin")
                 val ageMinInt = ageMin?.toInt() ?: 0
-
                 Movie(
                     name = document.getString("name") ?: "",
                     synopsis = document.getString("synopsis") ?: "",
@@ -71,19 +63,7 @@ class HomeActivity : AppCompatActivity() {
                 )
             }
             movieAdapter.updateMovies(movies)
+        }.addOnFailureListener { exception ->
         }
     }
-
-    private fun openUpdateMovieActivity(movie: Movie) {
-        val intent = Intent(this, ManageMovieActivity::class.java)
-        intent.putExtra("movie_name", movie.name)
-        intent.putExtra("movie_synopsis", movie.synopsis)
-        intent.putExtra("movie_director", movie.director)
-        intent.putExtra("ageMin", movie.ageMin.toString())
-        intent.putExtra("releaseDate", movie.releaseDate)
-        startActivity(intent)
-    }
-
 }
-
-
